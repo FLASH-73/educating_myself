@@ -1,0 +1,32 @@
+/* Filename: .devcontainer/devcontainer.json */
+{
+  "name": "Karpathy Learning Environment",
+
+  // Point to your docker-compose file
+  "dockerComposeFile": [
+    "../docker-compose.yml"
+  ],
+
+  // Specify which service in the compose file to use
+  "service": "karpathy-dev",
+
+  // Set the workspace folder inside the container
+  "workspaceFolder": "/home/jovyan/work",
+
+  // Forward the Jupyter port to your local machine
+  "forwardPorts": [8888],
+
+  // Install useful extensions inside the container
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        "ms-python.pylance"
+      ]
+    }
+  },
+  
+  // Run after the container is created
+  "postCreateCommand": "echo 'Container is ready. Use the Jupyter extension or open http://localhost:8888 in your browser.'"
+}

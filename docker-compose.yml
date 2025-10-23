@@ -1,0 +1,29 @@
+# Filename: docker-compose.yml
+
+version: '3.8'
+services:
+  # Define a name for your service
+  karpathy-dev:
+    # Build the image from the Dockerfile in the current directory
+    build: .
+    
+    # Mount the entire current directory into the container
+    volumes:
+      - .:/home/jovyan/work
+      
+    # Map port 8888 on your host machine to port 8888 in the container
+    ports:
+      - "8888:8888"
+      
+    # Keep the container running
+    command: >
+      start-notebook.sh --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.ip='0.0.0.0'
+
+    # (Optional) Enable NVIDIA GPU access if your host has one
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
